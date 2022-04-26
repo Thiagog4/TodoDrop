@@ -1,11 +1,12 @@
 ﻿@inherits LayoutComponentBase
-<MudThemeProvider/>
+<MudThemeProvider  @bind-IsDarkMode="@_isDarkMode" Theme="_theme"/>
 <MudDialogProvider/>
 <MudSnackbarProvider/>
 
 <MudLayout>
     <MudAppBar Elevation="1">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer" />
+        <MudSwitch @bind-Checked="@_isDarkMode" Color="Color.Primary" Class="ma-4" T="bool" Label="Toggle Light/Dark Mode"/>
         <MudSpacer />
         <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Link="https://github.com/MudBlazor/MudBlazor" Target="_blank" />
     </MudAppBar>
@@ -28,6 +29,8 @@
 
 @code
 {
+     private MudTheme _theme = new();
+    private bool _isDarkMode { get; set; } = true;
     bool open = false;
 
     void ToggleDrawer()
